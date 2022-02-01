@@ -243,6 +243,8 @@ class HttpResponseBase:
             key.startswith(('__Secure-', '__Host-')) or
             (samesite and samesite.lower() == 'none')
         )
+        # OpenRefactory Warning: The 'self.set_cookie' method sets cookie without setting the 'httponly' flag.
+        # This makes it vulnerable to the Cross-Site Scripting (XSS) attack.
         self.set_cookie(
             key, max_age=0, path=path, domain=domain, secure=secure,
             expires='Thu, 01 Jan 1970 00:00:00 GMT', samesite=samesite,
