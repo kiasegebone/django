@@ -138,6 +138,17 @@ class InteractiveMigrationQuestioner(MigrationQuestioner):
                 sys.exit(1)
             else:
                 try:
+                    '''
+                    ***************** OpenRefactory Warning *****************
+                    Possible OS command injection!
+                    Path:
+                    	File: questioner.py, Line: 132
+                    		code = input(prompt)
+                    		Variable code is assigned a tainted value from an external source.
+                    	File: questioner.py, Line: 141
+                    		return eval(code, {}, {'datetime': datetime, 'timezone': timezone})
+                    		Tainted information is used in a sink.
+                    '''
                     return eval(code, {}, {'datetime': datetime, 'timezone': timezone})
                 except (SyntaxError, NameError) as e:
                     print("Invalid input: %s" % e)

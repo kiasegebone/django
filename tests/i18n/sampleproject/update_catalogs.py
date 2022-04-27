@@ -49,6 +49,17 @@ def update_translation_catalogs():
 
     with open(pofile) as f:
         content = f.read()
+    '''
+    ***************** OpenRefactory Warning *****************
+    Possible Regex injection!
+    Path:
+    	File: update_catalogs.py, Line: 51
+    		content = f.read()
+    		Variable content is assigned a tainted value from an external source.
+    	File: update_catalogs.py, Line: 52
+    		content = re.sub(r'^"POT-Creation-Date.+$\s', '', content, flags=re.MULTILINE)
+    		Tainted information is used in a sink.
+    '''
     content = re.sub(r'^"POT-Creation-Date.+$\s', '', content, flags=re.MULTILINE)
     with open(pofile, 'w') as f:
         f.write(content)
