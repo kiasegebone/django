@@ -235,7 +235,7 @@ class BaseHandler:
                 response = await sync_to_async(
                     self.process_exception_by_middleware,
                     thread_sensitive=True,
-                )(e, request)
+                )(request, e)
                 if response is None:
                     raise
 
