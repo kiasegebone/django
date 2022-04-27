@@ -274,6 +274,9 @@ class Command(BaseCommand):
         for params in constraints.values():
             if params['unique']:
                 columns = params['columns']
+                # OpenRefactory Warning: The following binary operation
+                # None in columns
+                # may have a wrong operand. This may lead to a logical bug.
                 if None in columns:
                     has_unsupported_constraint = True
                 columns = [x for x in columns if x is not None]
